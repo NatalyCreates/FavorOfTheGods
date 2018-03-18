@@ -9,6 +9,8 @@ public class UIController : MonoBehaviour {
     public PlayerUIInfo[] playerUIInfos;
     public Dictionary<Enums.Players, PlayerUIInfo> playerUIs;
 
+    public DisasterUIInfo[] disasterUIInfos;
+
     public GameObject winnerPanel;
     public Text winnerText;
 
@@ -47,17 +49,27 @@ public class UIController : MonoBehaviour {
     }
 
     void OnPlayerStateChange(Enums.Players player, Enums.PlayerState targetState) {
-        
         foreach (Enums.PlayerState state in playerUIs[player].panels.Keys)
         {
             playerUIs[player].panels[state].SetActive(false);
         }
         playerUIs[player].panels[targetState].SetActive(true);
+        if (targetState != Enums.PlayerState.Disaster)
+        {
+            DisasterUIInfo info = disasterUIInfos.Where(d => d.playerName == player).ToList()[0];
+            info.disasterUI.SetActive(false);
+        }
     }
 
     void OnDisasterEncounter(Enums.Players player, Disaster disaster, bool hasEnoughForSacrifice) {
-        // Update Disaster UI with the disaster flavor text and the resource cost
-        // Grey out the Sacrifice option (but still show it) if player doesn't have enough
+        DisasterUIInfo info = disasterUIInfos.Where(d => d.playerName == player).ToList()[0];
+        info.reqWineText.text = disaster.requiredWine.ToString();
+        info.reqFoodText.text = disaster.requiredFood.ToString();
+        info.reqFleeceText.text = disaster.requiredFleece.ToString();
+        info.disasterText.text = "Disaster Strikes:\n" + disaster.text + "\nRequired Resources ->";
+        if (hasEnoughForSacrifice) playerUIs[player].panels[Enums.PlayerState.Disaster].GetComponentsInChildren<Text>()[1].color = Color.white;
+        else playerUIs[player].panels[Enums.PlayerState.Disaster].GetComponentsInChildren<Text>()[1].color = Color.grey;
+        info.disasterUI.SetActive(true);
     }
 
     void Update() {
@@ -88,7 +100,7 @@ public class UIController : MonoBehaviour {
     }
 
     void OnWinner(Enums.Players winner) {
-        winnerText.text = winner.ToString() + " Wins!";
+        winnerText.text = winner.ToString() + "\nWins!";
         winnerPanel.SetActive(true);
     }
 }
@@ -108,4 +120,15 @@ public class PlayerUIInfo
     public GameObject ControlPanel;
     public GameObject PrayPanel;
     public GameObject DisasterPanel;
+}
+
+[System.Serializable]
+public class DisasterUIInfo {
+    public Enums.Players playerName;
+
+    public GameObject disasterUI;
+    public Text disasterText;
+    public Text reqWineText;
+    public Text reqFoodText;
+    public Text reqFleeceText;
 }

@@ -176,7 +176,7 @@ public class Player : MonoBehaviour {
         else
         {
             SoundManager.Instance.DisasterHit();
-            timeProgressed = Mathf.Clamp(timeProgressed - (GlobalNums.TOTAL_JOURNEY_TIME * 0.2f), 0, GlobalNums.TOTAL_JOURNEY_TIME);
+            timeProgressed = Mathf.Clamp(timeProgressed - (GlobalNums.TOTAL_JOURNEY_TIME * 0.1f), 0, GlobalNums.TOTAL_JOURNEY_TIME);
         }
         ChangeState(Enums.PlayerState.Movement);
         if (OnResumeMovement != null) OnResumeMovement(playerId);
@@ -200,7 +200,7 @@ public class Player : MonoBehaviour {
 
     void TakeHit() {
         SoundManager.Instance.DisasterHit();
-        timeProgressed = Mathf.Clamp(timeProgressed - (GlobalNums.TOTAL_JOURNEY_TIME * 0.1f), 0, GlobalNums.TOTAL_JOURNEY_TIME);
+        timeProgressed = Mathf.Clamp(timeProgressed - (GlobalNums.TOTAL_JOURNEY_TIME * 0.05f), 0, GlobalNums.TOTAL_JOURNEY_TIME);
         // Resume
         if (OnResumeMovement != null) OnResumeMovement(playerId);
         ChangeState(Enums.PlayerState.Movement);
