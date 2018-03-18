@@ -53,7 +53,11 @@ public class Player : MonoBehaviour {
                 progress = timeProgressed / GlobalNums.TOTAL_JOURNEY_TIME;
                 if (progress >= 1f) GameManager.Instance.WinGame(playerId);
                 // Check for Disaster Encounters
-                if (timeProgressed >= randomDisasterTimes[nextDisasterNum])
+                if (nextDisasterNum >= randomDisasterTimes.Count)
+                {
+                    // skip
+                }
+                else if (timeProgressed >= randomDisasterTimes[nextDisasterNum])
                 {
                     lastDisaster = DisasterGenerator.Instance.GetRandomDisaster();
                     if (OnDisasterEncounter != null && lastDisaster != null) OnDisasterEncounter(playerId, lastDisaster, HasEnoughForSacrifice(lastDisaster));
