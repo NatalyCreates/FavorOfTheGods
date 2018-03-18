@@ -68,18 +68,18 @@ public class Player : MonoBehaviour {
                 {
                 case Enums.Players.Odysseus:
                     if (Input.GetKeyDown(KeyCode.Q)) MoveLane(true);
-                    if (Input.GetKeyDown(KeyCode.A)) MoveLane(false);
-                    if (Input.GetKeyUp(KeyCode.Z)) Pray();
+                    if (Input.GetKeyDown(KeyCode.A)) Pray();
+                    if (Input.GetKeyUp(KeyCode.Z)) MoveLane(false);
                     break;
                 case Enums.Players.Achilles:
                     if (Input.GetKeyDown(KeyCode.R)) MoveLane(true);
-                    if (Input.GetKeyDown(KeyCode.F)) MoveLane(false);
-                    if (Input.GetKeyUp(KeyCode.V)) Pray();
+                    if (Input.GetKeyDown(KeyCode.F)) Pray();
+                    if (Input.GetKeyUp(KeyCode.V)) MoveLane(false);
                     break;
                 case Enums.Players.Theseus:
                     if (Input.GetKeyDown(KeyCode.U)) MoveLane(true);
-                    if (Input.GetKeyDown(KeyCode.J)) MoveLane(false);
-                    if (Input.GetKeyUp(KeyCode.M)) Pray();
+                    if (Input.GetKeyDown(KeyCode.J)) Pray();
+                    if (Input.GetKeyUp(KeyCode.M)) MoveLane(false);
                     break;
                 }
                 break;
@@ -88,8 +88,8 @@ public class Player : MonoBehaviour {
                 switch (playerId)
                 {
                 case Enums.Players.Odysseus:
-                    if (Input.GetKeyDown(KeyCode.Q)) MakePrayerChoice(Enums.Players.Odysseus);
-                    if (Input.GetKeyDown(KeyCode.A)) MakePrayerChoice(Enums.Players.Achilles);
+                    if (Input.GetKeyDown(KeyCode.Q)) MakePrayerChoice(Enums.Players.Achilles);
+                    if (Input.GetKeyDown(KeyCode.A)) MakePrayerChoice(Enums.Players.Odysseus);
                     if (Input.GetKeyUp(KeyCode.Z)) MakePrayerChoice(Enums.Players.Theseus);
                     break;
                 case Enums.Players.Achilles:
@@ -99,8 +99,8 @@ public class Player : MonoBehaviour {
                     break;
                 case Enums.Players.Theseus:
                     if (Input.GetKeyDown(KeyCode.U)) MakePrayerChoice(Enums.Players.Odysseus);
-                    if (Input.GetKeyDown(KeyCode.J)) MakePrayerChoice(Enums.Players.Achilles);
-                    if (Input.GetKeyUp(KeyCode.M)) MakePrayerChoice(Enums.Players.Theseus);
+                    if (Input.GetKeyDown(KeyCode.J)) MakePrayerChoice(Enums.Players.Theseus);
+                    if (Input.GetKeyUp(KeyCode.M)) MakePrayerChoice(Enums.Players.Achilles);
                     break;
                 }
                 break;

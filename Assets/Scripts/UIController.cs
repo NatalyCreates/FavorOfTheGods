@@ -9,15 +9,19 @@ public class UIController : MonoBehaviour {
     public PlayerUIInfo[] playerUIInfos;
     public Dictionary<Enums.Players, PlayerUIInfo> playerUIs;
 
+    public GameObject winnerPanel;
+    public Text winnerText;
 
     private void Awake() {
         Player.OnPlayerStateChange += OnPlayerStateChange;
         Player.OnDisasterEncounter += OnDisasterEncounter;
+        GameManager.OnWinner += OnWinner;
     }
 
     private void OnDestroy() {
         Player.OnPlayerStateChange -= OnPlayerStateChange;
         Player.OnDisasterEncounter -= OnDisasterEncounter;
+        GameManager.OnWinner -= OnWinner;
     }
 
     void Start () {
@@ -81,6 +85,11 @@ public class UIController : MonoBehaviour {
     void DisplayProgress(Enums.Players player)
     {
         playerUIs[player].progressImage.fillAmount = playerUIs[player].player.progress;
+    }
+
+    void OnWinner(Enums.Players winner) {
+        winnerText.text = winner.ToString() + " Wins!";
+        winnerPanel.SetActive(true);
     }
 }
 
