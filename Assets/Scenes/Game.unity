@@ -231,7 +231,6 @@ MonoBehaviour:
     ControlPanel: {fileID: 304765719}
     PrayPanel: {fileID: 2029039464}
     DisasterPanel: {fileID: 1401465908}
-    currentPanel: {fileID: 0}
   - playerName: 1
     player: {fileID: 589458844}
     wineText: {fileID: 1356794770}
@@ -241,7 +240,6 @@ MonoBehaviour:
     ControlPanel: {fileID: 1044952796}
     PrayPanel: {fileID: 86959999}
     DisasterPanel: {fileID: 1745616259}
-    currentPanel: {fileID: 0}
   - playerName: 2
     player: {fileID: 1099640155}
     wineText: {fileID: 1156785012}
@@ -251,7 +249,6 @@ MonoBehaviour:
     ControlPanel: {fileID: 1216373634}
     PrayPanel: {fileID: 877692500}
     DisasterPanel: {fileID: 618461450}
-    currentPanel: {fileID: 0}
 --- !u!1 &56936307
 GameObject:
   m_ObjectHideFlags: 0
@@ -7609,7 +7606,7 @@ Transform:
   m_Children:
   - {fileID: 1167714966}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1628757117
 GameObject:
@@ -7856,24 +7853,10 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4393478234060460, guid: 03e746e2d7f439747bcf2025d24528d9, type: 2}
       propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 03e746e2d7f439747bcf2025d24528d9, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &1726714215
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4058227820624256, guid: a94805a057be0db4a83d58106196c25d, type: 2}
-      propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: a94805a057be0db4a83d58106196c25d, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 03e746e2d7f439747bcf2025d24528d9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1745616259
 GameObject:

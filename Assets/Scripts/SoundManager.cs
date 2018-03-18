@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : SingletonBehaviour<SoundManager> {
+public class SoundManager : ImmortalSingletonBehaviour<SoundManager> {
 
     public AudioSource sfx;
 
