@@ -22,8 +22,9 @@ public class Player : MonoBehaviour {
     public static event System.Action<Enums.Players, Enums.PlayerState> OnPlayerStateChange;
     public static event System.Action<Enums.Players, Disaster, bool> OnDisasterEncounter;
 
-
     BoxCollider2D myCollider;
+
+    bool inputDisabledForDisaster = false;
 
     void Awake() {
         myCollider = GetComponent<BoxCollider2D>();
@@ -40,6 +41,12 @@ public class Player : MonoBehaviour {
         {
             randomDisasterTimes.Add(Random.Range(timeRange[0], timeRange[1]));
         }
+    }
+
+    IEnumerator DisableInputForShortTimeWhenDisasterStrikes() {
+        inputDisabledForDisaster = true;
+        yield return new WaitForSeconds(1f);
+        inputDisabledForDisaster = false;
     }
 
     void Update() {
@@ -66,6 +73,7 @@ public class Player : MonoBehaviour {
                     Debug.Log("Disaster: " + lastDisaster.text + " - Wine: " + lastDisaster.requiredWine + ", Food: " + lastDisaster.requiredFood + ", Fleece: " + lastDisaster.requiredFleece);
                     ChangeState(Enums.PlayerState.Disaster);
                     if (OnPauseMovement != null) OnPauseMovement(playerId);
+                    StartCoroutine(DisableInputForShortTimeWhenDisasterStrikes());
                 }
                 // Controls
                 switch (playerId)
@@ -109,24 +117,27 @@ public class Player : MonoBehaviour {
                 }
                 break;
             case Enums.PlayerState.Disaster:
-                // Controls
-                switch (playerId)
+                if (!inputDisabledForDisaster)
                 {
-                case Enums.Players.Odysseus:
-                    if (Input.GetKeyDown(KeyCode.Q)) TryUseFavor();
-                    if (Input.GetKeyDown(KeyCode.A)) PayResources(lastDisaster);
-                    if (Input.GetKeyUp(KeyCode.Z)) TakeHit();
-                    break;
-                case Enums.Players.Achilles:
-                    if (Input.GetKeyDown(KeyCode.R)) TryUseFavor();
-                    if (Input.GetKeyDown(KeyCode.F)) PayResources(lastDisaster);
-                    if (Input.GetKeyUp(KeyCode.V)) TakeHit();
-                    break;
-                case Enums.Players.Theseus:
-                    if (Input.GetKeyDown(KeyCode.U)) TryUseFavor();
-                    if (Input.GetKeyDown(KeyCode.J)) PayResources(lastDisaster);
-                    if (Input.GetKeyUp(KeyCode.M)) TakeHit();
-                    break;
+                    // Controls
+                    switch (playerId)
+                    {
+                    case Enums.Players.Odysseus:
+                        if (Input.GetKeyDown(KeyCode.Q)) TryUseFavor();
+                        if (Input.GetKeyDown(KeyCode.A)) PayResources(lastDisaster);
+                        if (Input.GetKeyUp(KeyCode.Z)) TakeHit();
+                        break;
+                    case Enums.Players.Achilles:
+                        if (Input.GetKeyDown(KeyCode.R)) TryUseFavor();
+                        if (Input.GetKeyDown(KeyCode.F)) PayResources(lastDisaster);
+                        if (Input.GetKeyUp(KeyCode.V)) TakeHit();
+                        break;
+                    case Enums.Players.Theseus:
+                        if (Input.GetKeyDown(KeyCode.U)) TryUseFavor();
+                        if (Input.GetKeyDown(KeyCode.J)) PayResources(lastDisaster);
+                        if (Input.GetKeyUp(KeyCode.M)) TakeHit();
+                        break;
+                    }
                 }
                 break;
             }
